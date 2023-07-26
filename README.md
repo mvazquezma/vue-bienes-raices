@@ -27,3 +27,5 @@ npm run dev
 ```sh
 npm run build
 ```
+### Description
+Using Firesbase, Firestone, Storage, Pinia, Vue Router, Vuetify, Veevalidate
