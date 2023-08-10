@@ -19,8 +19,6 @@ export const useAuthStore = defineStore('auth', () => {
             .then((userCredential) => {
                 const user = userCredential.user
                 authUser.value = user
-
-                console.log(authUser.value);
             })
             .catch((error) => {
                 errorMsg.value = errorCodes[error.code]
