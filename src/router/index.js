@@ -16,6 +16,7 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: () => import('../views/admin/AdminLayout.vue'),
+      meta: { requiresAuth: true},
       children: [
         {
           path: '/admin/propiedades',
@@ -35,6 +36,19 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+// Guard de navegación
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(url => url.meta.requiresAuth)
+  
+  if(requiresAuth) {
+    // Comprobar que el usuario esté autenticado
+    
+  } else {
+    // No está protegido, mostramos la vista
+    next()
+  }
 })
 
 export default router
