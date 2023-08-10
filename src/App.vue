@@ -24,7 +24,7 @@
         <template v-slot:append>
           <div v-if="auth.isAuth">
             <v-btn :to="{name: 'admin-propiedades'}">Admin</v-btn>
-            <v-btn>Cerrar sesión</v-btn>
+            <v-btn @click="auth.logout">Cerrar sesión</v-btn>
           </div>
           <div v-else>
             <v-btn :to="{name: 'home'}">Inicio</v-btn>

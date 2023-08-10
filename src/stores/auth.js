@@ -1,12 +1,14 @@
 import { ref, computed, onMounted } from "vue";
 import { defineStore } from "pinia";
 import { useFirebaseAuth } from 'vuefire';
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
+import { useRouter } from "vue-router";
 
 export const useAuthStore = defineStore('auth', () => {
 
     const auth = useFirebaseAuth()
     const authUser = ref(null)
+    const router = useRouter()
 
     console.log(authUser.value);
 
@@ -29,9 +31,21 @@ export const useAuthStore = defineStore('auth', () => {
             .then((userCredential) => {
                 const user = userCredential.user
                 authUser.value = user
+                router.push({name: 'admin-propiedades'})
             })
             .catch((error) => {
                 errorMsg.value = errorCodes[error.code]
+            })
+    }
+
+    const logout = () => {
+        signOut(auth)
+            .then(() => {
+                authUser.value = null
+                router.push({name: 'login'})
+            })
+            .catch(error => {
+                console.log(error);
             })
     }
 
@@ -46,6 +60,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     return {
         login,
+        logout,
         hasError,
         errorMsg,
         isAuth
