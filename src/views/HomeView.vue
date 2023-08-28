@@ -1,10 +1,8 @@
 <script setup>
-  import usePropiedades from '../composables/usePropiedades'
-  import Propiedad from '../components/Propiedad.vue'
-  import { propertyPrice } from '../helpers'
-  const { alberca, propiedadesFiltradas } = usePropiedades()
-
-  const { propiedadesCollection } = usePropiedades()
+  import usePropiedades from '@/composables/usePropiedades'
+  import Propiedad from '@/components/Propiedad.vue'
+  import { propertyPrice } from  '@/helpers'
+  const { alberca, filteredItems } = usePropiedades()
 </script>
 
 <template>
@@ -19,7 +17,7 @@
 
       <v-row>
         <Propiedad 
-          v-for="propiedad in propiedadesFiltradas"
+          v-for="propiedad in filteredItems"
           :key="propiedad.id"
           :propiedad="propiedad"
           :price="propertyPrice"
